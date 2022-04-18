@@ -9,6 +9,7 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("BlockingMethodInNonBlockingContext")
 @Singleton
 class CompanyListingsParser @Inject constructor(): CSVParser<CompanyListing> {
 
