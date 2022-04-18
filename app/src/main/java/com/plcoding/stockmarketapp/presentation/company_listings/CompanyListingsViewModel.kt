@@ -10,14 +10,13 @@ import com.plcoding.stockmarketapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CompanyListingsViewModel @Inject constructor(
     private val repository: StockRepository
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(CompanyListingsState())
 
@@ -28,7 +27,7 @@ class CompanyListingsViewModel @Inject constructor(
     }
 
     fun onEvent(event: CompanyListingsEvent) {
-        when(event) {
+        when (event) {
             is CompanyListingsEvent.Refresh -> {
                 getCompanyListings(fetchFromRemote = true)
             }
@@ -51,7 +50,7 @@ class CompanyListingsViewModel @Inject constructor(
             repository
                 .getCompanyListings(fetchFromRemote, query)
                 .collect { result ->
-                    when(result) {
+                    when (result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
                                 state = state.copy(
